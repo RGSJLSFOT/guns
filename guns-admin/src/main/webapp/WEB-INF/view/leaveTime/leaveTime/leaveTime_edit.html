@@ -1,0 +1,67 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <input id="Id" name="请假ID"  type="hidden" value="${item.Id}" readonly="readonly" underline="true"/>
+                    <input id="userId" name="用户ID" type="hidden" value="${item.userId}" underline="true"/>
+                    <#input id="userName" name="用户名" value="${userName}" readonly="readonly"  underline="true"/>
+                    <!-- <#input id="leaveType" name="请假类型" value="${item.leaveType}" /> -->
+                    <input type="hidden" id="startTime" name="开始时间" value="${item.startTime}" type="text"/>
+                    <#input id="startTimeStr" name="开始时间" value="${startTime}" type="text" underline="true"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#select id="leaveType" name="请假类型" value="${item.leaveType}" underline="true">
+                        <option value="0">调休</option>
+                        <option value="1">事假</option>
+                        <option value="2">病假</option>
+                        <option value="3">年假</option>
+                    </#select>
+                    <input type="hidden" id="endTime" name="结束时间" value="${item.endTime}" type="text"/>
+                    <#input id="endTimeStr" name="结束时间" value="${endTime}" type="text" underline="true"/>
+                   
+                    <!--   <#input id="createTime" name="创建时间" value="${item.createTime}" underline="true"/>
+                    <#input id="updateTime" name="修改时间" value="${item.updateTime}" /> -->
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LeaveTimeInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LeaveTimeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/leaveTime/leaveTime/leaveTime_info.js"></script>
+<script>
+	laydate.render({
+	    elem: '#startTimeStr',
+	    type: 'datetime',
+	    format:'yyyy-MM-dd HH:mm:ss',
+	    done: function(value, date, endDate){
+	        $("#startTime").val(value);
+	    }
+	});
+	
+	laydate.render({
+	    elem: '#endTimeStr',
+	    type: 'datetime',
+	    format:'yyyy-MM-dd HH:mm:ss',
+	    done: function(value, date, endDate){
+	        var endTime = new Date(value).getTime();
+	        var startTime = new Date($("#startTimeStr").val()).getTime();
+	        $("#endTime").val(value);
+	        if(endTime <= startTime){
+	            Feng.info("结束时间要大于开始时间！");
+	        }
+	        
+	    }
+	});
+</script>
+@}

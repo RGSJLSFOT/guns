@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="Id" name="" value="${item.Id}" underline="true"/>
+                            <#input id="type" name="" value="${item.type}" underline="true"/>
+                            <#input id="ywId" name="" value="${item.ywId}" underline="true"/>
+                            <#input id="submitUserId" name="" value="${item.submitUserId}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="submitTime" name="" value="${item.submitTime}" underline="true"/>
+                            <#input id="auditUserId" name="" value="${item.auditUserId}" underline="true"/>
+                            <#input id="auditTime" name="" value="${item.auditTime}" underline="true"/>
+                            <#input id="auditResult" name="" value="${item.auditResult}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SubmitRecordInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SubmitRecordInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/auditRecord/submitRecord/submitRecord_info.js"></script>
+@}

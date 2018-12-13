@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.OverTimeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.OverTime">
+        <id column="Id" property="Id" />
+        <result column="userId" property="userId" />
+        <result column="submitStatus" property="submitStatus" />
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+        <result column="overTimeHour" property="overTimeHour" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Id, userId, submitStatus, startTime, endTime, createTime, updateTime,overTimeHour
+    </sql>
+    
+    <select id="selectOverTimesToAudit" resultType="map">
+    	select
+		<include refid="Base_Column_List" />
+		from tbl_overTime ot
+		where ot.submitStatus = 1 
+		and userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		<if test="startTime != null and startTime != ''">
+			and startTime like CONCAT(#{startTime},'%')
+		</if>
+    </select>
+    <select id="selectOverTimesAudited" resultType="map">
+    	select
+		<include refid="Base_Column_List" />
+		from tbl_overTime ot
+		where userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		and Id in (select ywId from tbl_submitRecord where type =2 and auditResult is not null)
+		<if test="startTime != null and startTime != ''">
+			and startTime like CONCAT(#{startTime},'%')
+		</if>
+    </select>
+
+	<update id="updateSubmitStatusById">
+    	update tbl_overTime ot set submitStatus = #{submitStatus} where ot.Id = #{Id}
+    </update>
+</mapper>

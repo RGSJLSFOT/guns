@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.SubmitRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.SubmitRecord">
+        <id column="Id" property="Id" />
+        <result column="type" property="type" />
+        <result column="ywId" property="ywId" />
+        <result column="submitUserId" property="submitUserId" />
+        <result column="submitTime" property="submitTime" />
+        <result column="auditUserId" property="auditUserId" />
+        <result column="auditTime" property="auditTime" />
+        <result column="auditResult" property="auditResult" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Id, type, ywId, submitUserId, submitTime, auditUserId, auditTime, auditResult
+    </sql>
+    
+	<select id="selectByTypeAndYwId"  resultType="SubmitRecord">
+		select <include refid="Base_Column_List" />
+		from tbl_submitRecord where type = #{type} and ywId = #{ywId}
+	</select>
+	
+</mapper>

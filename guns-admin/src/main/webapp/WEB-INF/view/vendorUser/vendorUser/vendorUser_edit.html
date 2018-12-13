@@ -1,0 +1,106 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <input id="Id" name="供应商员工ID" type="hidden" value="${item.Id}" readonly="readonly" underline="true"/>
+                            <#input id="userNO" name="员工工号" value="${item.userNO}" underline="true"/>
+                            <#input id="pwd" name="密码" value="${item.pwd}" underline="true"/>
+                            <#input id="userNameCh" name="中文名" value="${item.userNameCh}" underline="true"/>
+                            <#input id="userNameEn" name="英文名" value="${item.userNameEn}" underline="true"/>
+                            <input type="hidden" id="gender" name="性别" value="${item.gender}" />
+                            <#select id ="genderName" name="性别" underline="true">
+                              <option value="1">男</option>
+                              <option value="2">女</option>
+                            </#select>
+                            <input type="hidden" id="leaderId" name="领导人ID" value="${item.leaderId}" />
+                            <#input id="leaderName" name="领导人" value="${leaderName}" readonly="readonly"  underline="true"/>
+                            <input type="hidden" id="professionalLevel" name="职级" value="${item.professionalLevel}" />
+                            <#select id ="professionalLevelName" name="职级" underline="true">
+                              <option value="1">初级</option>
+                              <option value="2">中级</option>
+                              <option value="3">高级</option>
+                            </#select>
+                </div>
+
+                <div class="col-sm-6">
+                            <input type="hidden" id="roleId" name="角色ID" value="${item.roleId}" />
+                            <input type="hidden" id="vendorId" name="供应商ID" value="${item.vendorId}" />
+                            <input type="hidden" id="projectId" name="项目ID" value="${item.projectId}" />
+                            <input type="hidden" id="hiringStatus" name="状态" value="${item.hiringStatus}" />
+                            
+                            <#select id ="role" name="角色" underline="true">
+                              <option value="8">供应商职员</option>
+                              <option value="9">本部职员</option>
+                            </#select>
+
+                             <input type="hidden" id="vendorId" name="供应商ID" />
+                             <div class="form-group">
+							    <label class="col-sm-3 control-label">供应商</label>
+							    <div class="col-sm-9">
+							        <select class="form-control" id="vendor" name="vendor" onchange="VendorUser.selectVendor(this.value)">
+							             <div class="list-group" id="vendorList" data-bind="foreach: vendors">       
+			                         			@for(vendor in vendors!){
+			                                        <option href="javascript:void(0)" class="list-group-item" vendorId="${vendor.Id}" value="${vendor.Id}" onclick="VendorUser.selectVendor('${vendor.Id}')">${vendor.vendorNameCh}</option>
+			                                    @}
+			                              </div>   
+							        </select>
+							         
+							    </div>
+							</div>
+								
+                             <div class="hr-line-dashed"></div>
+                             
+                             <input type="hidden" id="projectId" name="项目ID" />
+                             <div class="form-group">
+							    <label class="col-sm-3 control-label">项目</label>
+							    <div class="col-sm-9">
+							        <select class="form-control" id="project" name="proj" onchange="VendorUser.selectProj(this.value)">
+							             <div class="list-group" id="projectList" data-bind="foreach: projects">       
+			                         			@for(proj in projects!){
+			                                        <option href="javascript:void(0)" class="list-group-item" vendorId="${proj.Id}" value="${proj.Id}" onclick="VendorUser.selectProj('${proj.Id}')">${proj.projectKey}-${proj.projectName}</option>
+			                                    @}
+			                              </div>   
+							        </select>
+							    </div>
+							</div>
+                              
+                            <div class="hr-line-dashed"></div>
+                                <#select id ="hiringStatusName" name="状态" underline="true">
+                                <option value="1">有po</option>
+                                <option value="0">无po</option>
+                                </#select>
+                            
+                                <input type="hidden" id="positionId" name="岗位ID" value="${item.positionId}" underline="true"/>
+                                <!-- <#input id="positionId" name="岗位ID" underline="true"/> -->
+                                <#select id ="position" name="岗位" underline="true">
+                                <option value="1">开发</option>
+                                <option value="2">QA</option>
+                                <option value="3">运维</option>
+                                <option value="4">UI</option>
+                                </#select>
+                            
+                            
+                                <#input id="entryTime" name="入职时间" value="${item.entryTime}" underline="true"/>
+                                <!-- <#input id="photo" name="头像" value="${item.photo}" underline="true"/>
+                                <#input id="createTime" name="" value="${item.createTime}" underline="true"/>
+                                <#input id="uptdaeTime" name="" value="${item.uptdaeTime}" />
+                                <#input id="email" name="邮箱" value="${item.email}" underline="true"/>
+                                <#input id="phone" name="联系电话" value="${item.phone}" />-->
+                         </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VendorUserInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VendorUserInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/vendorUser/vendorUser/vendorUser_info.js"></script>
+@}

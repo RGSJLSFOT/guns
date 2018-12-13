@@ -1,0 +1,73 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                 <div class="col-sm-6 b-r">
+                    <input id="Id" name="ID" type="hidden" value="${item.Id}"/>
+                    <input id="userId" name="员工ID" type="hidden" value="${item.userId}" underline="true" readonly="readonly"/>
+                    <#input id="userName" name="用户名" value="${userName}" readonly="readonly"  underline="true"/>
+                    <input type="hidden" id="startTime" name="开始时间" value="${item.startTime}" type="text"/>
+                    <#input id="startTimeStr" name="开始时间" value="${startTime}" type="text" underline="true"/>
+                </div> 
+                <div class="col-sm-6">
+                	<#input id="overTimeHour" name="加班时长" value="${item.overTimeHour}" type="text" underline="true"/>
+                    <input type="hidden" id="endTime" name="结束时间" value="${item.endTime}" type="text"/>
+                    <#input id="endTimeStr" name="结束时间" value="${endTime}" type="text" underline="true"/>
+                    <!--<#input id="createTime" name="创建时间" value="${item.createTime}" underline="true"/>
+                    <#input id="updateTime" name="修改时间" value="${item.updateTime}" /> -->
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="OverTimeInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="OverTimeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/overTime/overTime/overTime_info.js"></script>
+<script src="${ctxPath}/static/js/common/DateUtils.js"></script>
+<script>
+	$("#startTime").val($("#startTimeStr").val());
+	$("#endTime").val($("#endTimeStr").val());
+	laydate.render({
+	    elem: '#startTimeStr',
+	    type: 'datetime',
+	    format:'yyyy-MM-dd HH:mm:ss',
+	    done: function(value, date, endDate){
+	        $("#startTime").val(value);
+	        
+	        var startTime = new Date(value).getTime();
+	        var startTime = new Date($("#endTimeStr").val()).getTime();
+	        var ms =endTime -startTime;
+            $("#overTimeHour").val(Math.floor(ms / 1000 / 60 / 60));
+	    }
+	});
+	
+	laydate.render({
+	    elem: '#endTimeStr',
+	    type: 'datetime',
+	    format:'yyyy-MM-dd HH:mm:ss',
+	    done: function(value, date, endDate){
+	        var endTime = new Date(value).getTime();
+	        var startTime = new Date($("#startTimeStr").val()).getTime();
+	        $("#endTime").val(value);
+	        if(endTime <= startTime){
+	            Feng.info("结束时间要大于开始时间！");
+	        }
+	        var ms =endTime -startTime;
+            $("#overTimeHour").val(Math.floor(ms / 1000 / 60 / 60));
+	    }
+	});
+	
+	/* function getOverTimeHour(){
+       $("#overTimeHour").val(DateUtils.getHour($("#startTime").val(),$("#endTime").val()));//根据开始时间和结束时间算出工作时长
+    }
+   	getOverTimeHour(); */
+</script>
+@}

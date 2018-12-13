@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <input id="Id" name="项目ID" type="hidden" value="${item.Id}" readonly="readonly" underline="true"/>
+                            <#input id="projectName" name="项目名称" value="${item.projectName}" underline="true"/>
+                            <#input id="projectKey" name="项目KEY" value="${item.projectKey}" underline="true"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="responsiblePersion" name="负责人" value="${item.responsiblePersion}"  underline="true"/>
+                          <!--   <#input id="parentId" name="父级项目ID" value="${item.parentId}" underline="true"/> -->
+                            <#input id="description" name="项目描述" value="${item.description}" underline="true"/>
+                        <!--     <#input id="createTime" name="创建时间" value="${item.createTime}" underline="true"/>
+                            <#input id="updateTime" name="修改时间" value="${item.updateTime}" /> -->
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ProjectInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ProjectInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/project/project/project_info.js"></script>
+@}

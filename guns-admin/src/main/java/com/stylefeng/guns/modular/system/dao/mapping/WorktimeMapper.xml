@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.WorktimeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Worktime">
+        <id column="Id" property="Id" />
+        <result column="userId" property="userId" />
+        <result column="week" property="week" />
+        <result column="workDate" property="workDate" />
+        <result column="startTime" property="startTime" />
+        <result column="endTime" property="endTime" />
+        <result column="workTime" property="workTime" />
+        <result column="overTime" property="overTime" />
+        <result column="content" property="content" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+        <result column="submitStatus" property="submitStatus" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Id, userId, week, workDate, startTime, endTime, workTime, overTime, content, createTime, updateTime, submitStatus
+    </sql>
+    
+  	<select id="selectWorkTimesToAudit" resultType="map">
+    	select
+		<include refid="Base_Column_List" />
+		from tbl_worktime wt
+		where wt.submitStatus = 1 
+		and userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		<if test="content != null and content != ''">
+			and content like CONCAT('%',#{content},'%')
+		</if>
+		<if test="workDate != null and workDate != ''">
+			and createTime like CONCAT(#{workDate},'%')
+		</if>
+    </select>
+    
+  	<select id="selectWorkTimesAudited" resultType="map">
+    	select
+		<include refid="Base_Column_List" />
+		from tbl_worktime wt
+		where userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		and Id in (select ywId from tbl_submitRecord where type = 1 and auditResult is not null)
+		<if test="content != null and content != ''">
+			and content like CONCAT('%',#{content},'%')
+		</if>
+		<if test="workDate != null and workDate != ''">
+			and createTime like CONCAT(#{workDate},'%')
+		</if>
+    </select>
+
+	<update id="updateSubmitStatusById">
+    	update tbl_worktime wt set submitStatus = #{submitStatus} where wt.Id = #{Id}
+    </update>
+    
+</mapper>

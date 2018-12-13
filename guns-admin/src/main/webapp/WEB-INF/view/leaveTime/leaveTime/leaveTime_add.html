@@ -1,0 +1,57 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                        <!-- <#input id="Id" name="请假ID" visible="false" readonly="readonly" underline="true"/>
+                        <#input id="userId" name="用户ID" underline="true"/> -->
+                        <!-- <#input id="leaveType" name="请假类型" underline="true"/> -->
+                        <#input id="userName" name="用户名" value="${userName}" readonly="readonly"  underline="true"/>
+                        
+                        <#input id="startTime" name="开始时间" type="text" underline="true"/>
+                         
+                </div>
+                <div class="col-sm-6">
+            			<#select id="leaveType" name="请假类型" underline="true">
+                        	<option value="0">调休</option>
+                        	<option value="1">事假</option>
+                        	<option value="2">病假</option>
+                        	<option value="3">年假</option>
+                        </#select>
+                        <#input id="endTime" name="结束时间" type="text"/>
+                        <!-- <#input id="createTime" visible="false" name="创建时间" underline="true"/>
+                        <#input id="updateTime" visible="false" name="修改时间" underline="true"/>  -->
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="保存" id="ensure" icon="fa-check" clickFun="LeaveTimeInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LeaveTimeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/leaveTime/leaveTime/leaveTime_info.js"></script>
+<script>
+    laydate.render({
+        elem: '#startTime',
+        type: 'datetime',
+    });
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime',
+        done : function(value, date, endDate){
+            var endTime = new Date(value).getTime();
+            var startTime = new Date($("#startTime").val()).getTime();
+            if(endTime <= startTime){
+                Feng.info("结束时间要大于开始时间！");
+            } 
+        }
+    });
+</script>
+@}

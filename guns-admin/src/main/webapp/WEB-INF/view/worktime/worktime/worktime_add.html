@@ -1,0 +1,84 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+            	<input id="startTime" type="hidden"/>
+            	<input id="endTime" type="hidden"/>
+                <div class="col-sm-6 b-r">
+                	<!-- <#input id="Id" name="工时ID" underline="true" readonly="readonly"/> -->
+                	<!-- <#input id="userId" name="用户ID" underline="true" readonly="readonly"/> -->
+                	<#input id="week" name="星期" underline="true" readonly="readonly"/>
+                	<#input id="workDate" name="日期" type="text" underline="true" />
+                    <#input id="content" name="工作内容" type="text" underline="true"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="workTime" name="工作时长" type="text" underline="true" readonly="readonly"  />
+         			<#input id="startTimeStr" name="开始时间" type="text" underline="true" />
+                    <#input id="endTimeStr" name="结束时间" type="text"  underline="true" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="保存" id="ensure" icon="fa-check" clickFun="WorktimeInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="WorktimeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/worktime/worktime/worktime_info.js"></script>
+<script>
+	DateUtils.expandDate();
+	laydate.render({
+	    elem: '#workDate',
+	    value: new Date().format("yyyy-MM-dd"),
+		done: function(value, date, endDate){
+            $("#week").val(weekArr[new Date(Date.parse(value.replace(/\-/g,"/"))).getDay()]);
+            $("#startTime").val($("#workDate").val()+" "+$("#startTimeStr").val());
+            $("#endTime").val($("#workDate").val()+" "+$("#endTimeStr").val());
+        }
+	});
+	
+    laydate.render({
+        elem: '#startTimeStr',
+        type: 'time',
+        //value: new Date().toLocaleDateString().split('/').join('-') + " 09:00:00",
+        value: "09:00:00",
+        done: function(value, date, endDate){
+        	$("#startTime").val($("#workDate").val()+" "+value);
+            calcWorkTime();
+        }
+    });
+    laydate.render({
+        elem: '#endTimeStr',
+        type: 'time',
+        //value: new Date().toLocaleDateString().split('/').join('-') + " 18:00:00",
+        value: "18:00:00",
+        done: function(value, date, endDate){
+            var endTime = new Date($("#workDate").val()+" "+value).getTime();
+            var startTime = new Date($("#startTime").val()).getTime();
+            if(endTime <= startTime){
+                Feng.info("结束时间要大于开始时间！");
+                return;
+            }
+            $("#endTime").val($("#workDate").val()+" "+value);
+            calcWorkTime();
+            
+        }
+    });
+
+/*     function calcWorkTime(){
+        $("#workTime").val(DateUtils.getHour($("#startTime").val(),$("#endTime").val()));//根据开始时间和结束时间算出工作时长
+    } */
+    
+    $("#startTime").val($("#workDate").val()+" "+$("#startTimeStr").val());
+    $("#endTime").val($("#workDate").val()+" "+$("#endTimeStr").val());
+    calcWorkTime();
+    $("#week").val(weekArr[new Date(Date.parse($("#workDate").val().replace(/\-/g,"/"))).getDay()]);
+</script>
+@}

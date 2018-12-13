@@ -1,0 +1,56 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="Id" name="ID" readonly="readonly" underline="true"/>
+                    
+                     <!--<#input id="userId" name="员工ID" underline="true" readonly="readonly"/> -->
+                    <#input id="startTime" name="开始时间" type="text" underline="true"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="overTimeHour" name="加班时长" type="text" underline="true"/>
+                    <#input id="endTime" name="结束时间" type="text" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="保存" id="ensure" icon="fa-check" clickFun="OverTimeInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="OverTimeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/overTime/overTime/overTime_info.js"></script>
+<script src="${ctxPath}/static/js/common/DateUtils.js"></script>
+<script>
+    laydate.render({
+        elem: '#startTime',
+        type: 'datetime',
+        value: new Date().toLocaleDateString().split('/').join('-') +" 19:00:00",
+    });
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime',
+        done : function(value, date, endDate){
+            var endTime = new Date(value).getTime();
+            var startTime = new Date($("#startTime").val()).getTime();
+            if(endTime <= startTime){
+                Feng.info("结束时间要大于开始时间！");
+            } 
+            var ms =endTime -startTime;
+            $("#overTimeHour").val(Math.floor(ms / 1000 / 60 / 60));
+        }
+    });
+    
+   	function getOverTimeHour(){
+       $("#overTimeHour").val(DateUtils.getHour($("#startTime").val(),$("#endTime").val()));//根据开始时间和结束时间算出工作时长
+    }
+</script>
+@}

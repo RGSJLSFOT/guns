@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.ProjectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Project">
+        <id column="Id" property="Id" />
+        <result column="projectName" property="projectName" />
+        <result column="projectKey" property="projectKey" />
+        <result column="responsiblePersion" property="responsiblePersion" />
+        <result column="parentId" property="parentId" />
+        <result column="description" property="description" />
+        <result column="createTime" property="createTime" />
+        <result column="updateTime" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        Id, projectName, projectKey, responsiblePersion, parentId, description, createTime, updateTime
+    </sql>
+
+</mapper>
