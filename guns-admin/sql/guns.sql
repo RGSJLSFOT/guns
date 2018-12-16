@@ -142,6 +142,7 @@ CREATE TABLE `sys_menu`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1072677569146404872 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单表' ROW_FORMAT = Dynamic;
 
+
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
