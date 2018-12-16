@@ -24,7 +24,7 @@ public class SubmitRecord extends Model<SubmitRecord> {
     private Integer Id;
     private Integer type;
     private Integer ywId;
-    private Integer submitUserId;
+    private String submitUserId;
     private Date submitTime;
     private String auditUserId;
     private Date auditTime;
@@ -55,11 +55,11 @@ public class SubmitRecord extends Model<SubmitRecord> {
         this.ywId = ywId;
     }
 
-    public Integer getSubmitUserId() {
+    public String getSubmitUserId() {
         return submitUserId;
     }
 
-    public void setSubmitUserId(Integer submitUserId) {
+    public void setSubmitUserId(String submitUserId) {
         this.submitUserId = submitUserId;
     }
 

@@ -854,8 +854,7 @@ delimiter ;
 DROP TRIGGER IF EXISTS `tib_vendor_user`;
 delimiter ;;
 CREATE TRIGGER `tib_vendor_user` AFTER INSERT ON `tbl_vendorUser` FOR EACH ROW BEGIN
-	
-	INSERT INTO sys_user ( AVATAR, ACCOUNT, PASSWORD, SALT, NAME, BIRTHDAY, SEX, EMAIL, PHONE, STATUS, CREATETIME )
+	INSERT INTO sys_user ( AVATAR, ACCOUNT, PASSWORD, SALT, NAME, BIRTHDAY, SEX, EMAIL, PHONE, STATUS,roleid, CREATETIME )
 	VALUES
 		( '-',
 			NEW.userNO,
@@ -867,11 +866,53 @@ CREATE TRIGGER `tib_vendor_user` AFTER INSERT ON `tbl_vendorUser` FOR EACH ROW B
 			NEW.EMAIL,
 			NEW.PHONE,
 			1,
+			NEW.roleId,
 			CURRENT_TIMESTAMP  
 		);
-
 END
 ;;
 delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+ 
+
+DROP TRIGGER IF EXISTS `tub_vendor_user`;
+delimiter ;;
+CREATE TRIGGER `tub_vendor_user` AFTER UPDATE ON `tbl_vendorUser` FOR EACH ROW BEGIN  
+	IF
+		NEW.PWD = "******" THEN
+			UPDATE sys_user 
+			SET --  PASSWORD = NEW.PWD,
+			--  SALT = NEW.SALT,
+			NAME = NEW.USERNAMEch,
+			SEX = NEW.gender,
+			EMAIL = NEW.EMAIL,
+			PHONE = NEW.PHONE,
+		  roleid = NEW.roleId+""
+		WHERE account = NEW.userNO;
+	ELSE 
+		UPDATE sys_user 
+		SET PASSWORD = NEW.PWD,
+		SALT = NEW.SALT,
+		NAME = NEW.USERNAMEch,
+		SEX = NEW.gender,
+		EMAIL = NEW.EMAIL,
+		PHONE = NEW.PHONE,
+		roleid = NEW.roleId+""
+		WHERE  account = NEW.userNO;
+		
+	END IF;
+
+END
+20:45:36
+
+
+表结构更改：
+--- vendorUser.leaderId int-->varchar
+--- workTime.userId int-->varchar
+--- overTime.userId int-->varchar
+--- leaveTime.userId int-->varchar
+--- submitRecord.auditUserId -->varchar
+--- submitRecord.submitUserId -->varchar

@@ -159,7 +159,7 @@ public class WorktimeController extends BaseController {
 	    		VendorUser vendorUser = vendorUserService.selectByUserNO(AuthKit.getUser().getAccount());
 	    		submitRecord.setType(1);
 	    		submitRecord.setYwId(workTimeId);
-	    		submitRecord.setSubmitUserId(AuthKit.getUser().getId());
+	    		submitRecord.setSubmitUserId(AuthKit.getUser().getAccount());
 	    		submitRecord.setAuditUserId(vendorUser.getLeaderId());
 	    		submitRecordService.insert(submitRecord);
     		}else if(status == 2 || status == 3 ){
