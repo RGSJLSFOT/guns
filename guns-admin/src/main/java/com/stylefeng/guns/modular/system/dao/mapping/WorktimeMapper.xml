@@ -28,7 +28,7 @@
 		<include refid="Base_Column_List" />
 		from tbl_worktime wt
 		where wt.submitStatus = 1 
-		and userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		and userId in (select userNO from tbl_vendorUser vu where LeaderId = #{userId})
 		<if test="content != null and content != ''">
 			and content like CONCAT('%',#{content},'%')
 		</if>
@@ -41,7 +41,7 @@
     	select
 		<include refid="Base_Column_List" />
 		from tbl_worktime wt
-		where userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		where userId in (select userNO from tbl_vendorUser vu where LeaderId = #{userId})
 		and Id in (select ywId from tbl_submitRecord where type = 1 and auditResult is not null)
 		<if test="content != null and content != ''">
 			and content like CONCAT('%',#{content},'%')

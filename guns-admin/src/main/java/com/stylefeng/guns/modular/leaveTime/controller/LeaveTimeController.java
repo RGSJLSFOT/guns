@@ -79,7 +79,7 @@ public class LeaveTimeController extends BaseController {
         model.addAttribute("startTime",sdf.format(leaveTime.getStartTime()));
         model.addAttribute("endTime",sdf.format(leaveTime.getEndTime()));
         model.addAttribute("item",leaveTime);
-        model.addAttribute("userName", ConstantFactory.me().getUserNameById((Integer)leaveTime.getUserId()));
+        model.addAttribute("userName",leaveTime.getUserId());
         LogObjectHolder.me().set(leaveTime);
         return PREFIX + "leaveTime_edit.html";
     }
@@ -90,8 +90,8 @@ public class LeaveTimeController extends BaseController {
     @RequestMapping("/list")
     @ResponseBody
     public Object list(Integer leaveType,String leaveDate, Integer type) {
-        Integer userId = AuthKit.getUser().getId();
-    	
+        //Integer userId = AuthKit.getUser().getId();
+        String userId = AuthKit.getUser().getAccount();
         List<Map<String, Object>> leaveimes;
     	if(AuthKit.getUser().getRoleList().contains(9)){//角色中包含本部职员
     		if(type!=null && type == 1){
@@ -120,7 +120,7 @@ public class LeaveTimeController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(LeaveTime leaveTime) {
-    	leaveTime.setUserId(AuthKit.getUser().getId());
+    	leaveTime.setUserId(AuthKit.getUser().getAccount());
         leaveTimeService.insert(leaveTime);
         return SUCCESS_TIP;
     }
@@ -166,7 +166,7 @@ public class LeaveTimeController extends BaseController {
 	    		submitRecordService.insert(submitRecord);
     		}else if(status == 2 || status == 3 ){
     			SubmitRecord submitRecord = submitRecordService.selectByTypeAndYwId(3, leaveTimeId);
-	    		submitRecord.setAuditUserId(AuthKit.getUser().getId());
+	    		submitRecord.setAuditUserId(AuthKit.getUser().getAccount());
 	    		submitRecord.setAuditTime(new Date());
 	    		submitRecord.setAuditResult(ConstantFactory.me().getSubmitStatusName(status));
 	    		submitRecordService.updateById(submitRecord);

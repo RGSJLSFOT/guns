@@ -8,7 +8,7 @@
                 <div class="col-sm-6 b-r">
                             <!-- <#input id="Id" name="供应商员工ID" readonly="readonly" underline="true"/> -->
                             <#input id="userNO" name="员工工号" underline="true"/>
-                            <#input id="pwd" name="密码" underline="true"/>
+                            <#input id="pwd" name="密码" value="111111" readonly="readonly" underline="true"/>
                             <#input id="userNameCh" name="中文名" underline="true"/>
                             <#input id="userNameEn" name="英文名" underline="true"/>
                             <#select id ="gender" name="性别" underline="true">
@@ -30,7 +30,7 @@
                             
                             <#select id ="roleId" name="角色" underline="true">
                               <option value="8">供应商职员</option>
-                              <option value="9">本部职员</option>
+                              <!-- <option value="9">本部职员</option> -->
                             </#select>
 
                              <input type="hidden" id="vendorId" name="供应商ID" />

@@ -24,7 +24,7 @@
 		<include refid="Base_Column_List" />
 		from tbl_leaveTime lt
 		where lt.submitStatus = 1 
-		and userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		and userId in (select userNO from tbl_vendorUser vu where LeaderId = #{userId})
 		<if test="leaveType != null and leaveType != ''">
 			and leaveType =#{leaveType}
 		</if>
@@ -37,7 +37,7 @@
     	select
 		<include refid="Base_Column_List" />
 		from tbl_leaveTime lt
-		where userId in (select Id from tbl_vendorUser vu where LeaderId = #{userId})
+		where userId in (select userNO from tbl_vendorUser vu where LeaderId = #{userId})
 		and Id in (select ywId from tbl_submitRecord where type = 3 and auditResult is not null)
 		<if test="leaveType != null and leaveType != ''">
 			and leaveType =#{leaveType}

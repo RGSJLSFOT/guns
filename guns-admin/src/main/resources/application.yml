@@ -44,7 +44,7 @@ spring:
     #url: jdbc:mysql://47.98.112.121:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
     url: jdbc:mysql://47.98.112.121:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: 
+    password: Rgs_201803
     db-name: guns #用来搜集数据库的所有表
     filters: wall,mergeStat
 

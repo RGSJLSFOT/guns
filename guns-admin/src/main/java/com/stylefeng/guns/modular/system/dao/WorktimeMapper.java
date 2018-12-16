@@ -19,9 +19,9 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-12-06
  */
 public interface WorktimeMapper extends BaseMapper<Worktime> {
-	public List<Map<String, Object>> selectWorkTimesToAudit(@Param("content") String content,@Param("workDate") String workDate, @Param("userId")Integer userId);
+	public List<Map<String, Object>> selectWorkTimesToAudit(@Param("content") String content,@Param("workDate") String workDate, @Param("userId")String userId);
 	
-	public List<Map<String, Object>> selectWorkTimesAudited(@Param("content") String content,@Param("workDate") String workDate, @Param("userId")Integer userId);
+	public List<Map<String, Object>> selectWorkTimesAudited(@Param("content") String content,@Param("workDate") String workDate, @Param("userId")String userId);
 	
 	public int updateSubmitStatusById(@Param("submitStatus") Integer submitStatus,@Param("Id") Integer Id);
 }

@@ -6,8 +6,9 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <input id="Id" name="供应商员工ID" type="hidden" value="${item.Id}" readonly="readonly" underline="true"/>
-                            <#input id="userNO" name="员工工号" value="${item.userNO}" underline="true"/>
-                            <#input id="pwd" name="密码" value="${item.pwd}" underline="true"/>
+                            <#input id="userNO" name="员工工号" value="${item.userNO}" readonly="readonly" underline="true"/>
+                            <!-- <#input id="pwd" name="密码" value="${item.pwd}" readonly="readonly" underline="true"/> -->
+                            <#input id="pwd" name="密码" value="******" underline="true"/>
                             <#input id="userNameCh" name="中文名" value="${item.userNameCh}" underline="true"/>
                             <#input id="userNameEn" name="英文名" value="${item.userNameEn}" underline="true"/>
                             <input type="hidden" id="gender" name="性别" value="${item.gender}" />
@@ -33,7 +34,7 @@
                             
                             <#select id ="role" name="角色" underline="true">
                               <option value="8">供应商职员</option>
-                              <option value="9">本部职员</option>
+                              <!-- <option value="9">本部职员</option> -->
                             </#select>
 
                              <input type="hidden" id="vendorId" name="供应商ID" />
@@ -81,14 +82,12 @@
                                 <option value="3">运维</option>
                                 <option value="4">UI</option>
                                 </#select>
-                            
-                            
                                 <#input id="entryTime" name="入职时间" value="${item.entryTime}" underline="true"/>
                                 <!-- <#input id="photo" name="头像" value="${item.photo}" underline="true"/>
                                 <#input id="createTime" name="" value="${item.createTime}" underline="true"/>
-                                <#input id="uptdaeTime" name="" value="${item.uptdaeTime}" />
+                                <#input id="uptdaeTime" name="" value="${item.uptdaeTime}" />-->
                                 <#input id="email" name="邮箱" value="${item.email}" underline="true"/>
-                                <#input id="phone" name="联系电话" value="${item.phone}" />-->
+                                <#input id="phone" name="联系电话" value="${item.phone}" />
                          </div>
             </div>
 

@@ -15,6 +15,6 @@ public class OverTimeWrapper extends BaseControllerWarpper {
     @Override
     public void warpTheMap(Map<String, Object> map) {
     	map.put("submitStatusName", ConstantFactory.me().getSubmitStatusName((Integer) map.get("submitStatus")));
-    	map.put("userName", ConstantFactory.me().getUserNameById((Integer)map.get("userId")));
+    	map.put("userName", map.get("userId"));
     }
 }

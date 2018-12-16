@@ -97,7 +97,16 @@ VendorUserInfoDlg.editSubmit = function() {
     this.collectData();
     if(!check(this.vendorUserInfoData)){
         return;
-    }//校验
+    }
+    this.vendorUserInfoData.roleId =$("#role").val();
+    this.vendorUserInfoData.positionId =$("#position").val();
+    this.vendorUserInfoData.vendorId =$("#vendor").val();
+    this.vendorUserInfoData.gender =$("#genderName").val();
+    this.vendorUserInfoData.projectId =$("#project").val();
+    this.vendorUserInfoData.professionalLevel =$("#professionalLevelName").val();
+    this.vendorUserInfoData.hiringStatus =$("#hiringStatusName").val();
+    
+    //校验
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/vendorUser/update", function(data){
         Feng.success("修改成功!");
@@ -135,10 +144,6 @@ function check(data){
     //     Feng.info("请输入正确的负责人名称!");
     //     return false;
     // }
-    if(!data.address){
-        Feng.info("请输入正确的地址!");
-        return false;
-    }
     if(!data.vendorId){
         Feng.info("请输入正确的供应商!");
         return false;

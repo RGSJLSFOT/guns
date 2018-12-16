@@ -24,7 +24,7 @@ public class VendorUser extends Model<VendorUser> {
     private String userNameCh;
     private String userNameEn;
     private Integer gender;
-    private Integer leaderId;
+    private String leaderId;
     private String professionalLevel;
     private String email;
     private String phone;
@@ -88,11 +88,11 @@ public class VendorUser extends Model<VendorUser> {
         this.gender = gender;
     }
 
-    public Integer getLeaderId() {
+    public String getLeaderId() {
         return leaderId;
     }
 
-    public void setLeaderId(Integer leaderId) {
+    public void setLeaderId(String leaderId) {
         this.leaderId = leaderId;
     }
 

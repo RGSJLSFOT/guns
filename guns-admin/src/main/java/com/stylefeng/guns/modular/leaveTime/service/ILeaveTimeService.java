@@ -24,9 +24,9 @@ public interface ILeaveTimeService extends IService<LeaveTime> {
      */
     List<Map<String, Object>> selectLeaveTimes(@Param("userId") String userId,@Param("leaveType") String leaveType, @Param("beginTime") String beginTime, @Param("endTime") String endTime);
     
-    List<Map<String, Object>> selectLeaveTimesToAudit(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId") Integer userId);
+    List<Map<String, Object>> selectLeaveTimesToAudit(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId") String userId);
 
-    List<Map<String, Object>> selectLeaveTimesAudited(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId") Integer userId);
+    List<Map<String, Object>> selectLeaveTimesAudited(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId") String userId);
 	
 	int updateSubmitStatusById(@Param("submitStatus") Integer submitStatus,@Param("Id") Integer Id);
 

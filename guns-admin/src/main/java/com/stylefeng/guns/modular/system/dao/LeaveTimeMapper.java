@@ -21,9 +21,9 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 public interface LeaveTimeMapper extends BaseMapper<LeaveTime> {
 	 List<Map<String, Object>> selectLeaveTimes(@Param("userId") String userId,@Param("leaveType") String leaveType, @Param("beginTime") String beginTime, @Param("endTime") String endTime);
 	
-	 public List<Map<String, Object>> selectLeaveTimesToAudit(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId")Integer userId);
+	 public List<Map<String, Object>> selectLeaveTimesToAudit(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId")String userId);
 	
-	 public List<Map<String, Object>> selectLeaveTimesAudited(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId")Integer userId);
+	 public List<Map<String, Object>> selectLeaveTimesAudited(@Param("leaveType")Integer leaveType,@Param("leaveDate")String leaveDate,@Param("userId")String userId);
 		
 	 public int updateSubmitStatusById(@Param("submitStatus") Integer submitStatus,@Param("Id") Integer Id);
 }

@@ -73,7 +73,7 @@ public class WorktimeController extends BaseController {
         model.addAttribute("item",worktime);
         model.addAttribute("startTime",sdf.format(worktime.getStartTime()).split(" ")[1]);
         model.addAttribute("endTime",sdf.format(worktime.getEndTime()).split(" ")[1]);
-        model.addAttribute("userName", ConstantFactory.me().getUserNameById((Integer)worktime.getUserId()));
+        model.addAttribute("userName",worktime.getUserId());
         LogObjectHolder.me().set(worktime);
         return PREFIX + "worktime_edit.html";
     }
@@ -84,7 +84,8 @@ public class WorktimeController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String content,String workDate,Integer type,Model model) {
-    	Integer userId = AuthKit.getUser().getId();
+    	//Integer userId = AuthKit.getUser().getId();
+    	String userId = AuthKit.getUser().getAccount();
     	
     	//如果是沃尔玛员工则显示下面供应商员工提交的单据
     	
@@ -117,7 +118,7 @@ public class WorktimeController extends BaseController {
     @ResponseBody
     public Object add(Worktime worktime) {
     	worktime.setWeek(DateUtils.getWeekOfDate( worktime.getWorkDate()));
-    	worktime.setUserId(AuthKit.getUser().getId());
+    	worktime.setUserId(AuthKit.getUser().getAccount());
         worktimeService.insert(worktime);
         return SUCCESS_TIP;
     }
@@ -163,7 +164,7 @@ public class WorktimeController extends BaseController {
 	    		submitRecordService.insert(submitRecord);
     		}else if(status == 2 || status == 3 ){
     			SubmitRecord submitRecord = submitRecordService.selectByTypeAndYwId(1, workTimeId);
-	    		submitRecord.setAuditUserId(AuthKit.getUser().getId());
+	    		submitRecord.setAuditUserId(AuthKit.getUser().getAccount());
 	    		submitRecord.setAuditTime(new Date());
 	    		submitRecord.setAuditResult(ConstantFactory.me().getSubmitStatusName(status));
 	    		submitRecordService.updateById(submitRecord);

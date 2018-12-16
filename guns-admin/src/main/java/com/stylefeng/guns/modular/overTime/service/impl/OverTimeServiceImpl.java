@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Service
 public class OverTimeServiceImpl extends ServiceImpl<OverTimeMapper, OverTime> implements IOverTimeService {
-	public List<Map<String, Object>> selectOverTimesToAudit(String startTime, Integer userId) {
+	public List<Map<String, Object>> selectOverTimesToAudit(String startTime, String userId) {
         return this.baseMapper.selectOverTimesToAudit(startTime, userId);
     }
-	public List<Map<String, Object>> selectOverTimesAudited(String startTime, Integer userId) {
+	public List<Map<String, Object>> selectOverTimesAudited(String startTime, String userId) {
 		return this.baseMapper.selectOverTimesAudited(startTime, userId);
 	}
 	

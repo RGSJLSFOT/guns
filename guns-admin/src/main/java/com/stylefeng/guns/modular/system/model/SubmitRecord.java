@@ -26,7 +26,7 @@ public class SubmitRecord extends Model<SubmitRecord> {
     private Integer ywId;
     private Integer submitUserId;
     private Date submitTime;
-    private Integer auditUserId;
+    private String auditUserId;
     private Date auditTime;
     private String auditResult;
 
@@ -71,11 +71,11 @@ public class SubmitRecord extends Model<SubmitRecord> {
         this.submitTime = submitTime;
     }
 
-    public Integer getAuditUserId() {
+    public String getAuditUserId() {
         return auditUserId;
     }
 
-    public void setAuditUserId(Integer auditUserId) {
+    public void setAuditUserId(String auditUserId) {
         this.auditUserId = auditUserId;
     }
 

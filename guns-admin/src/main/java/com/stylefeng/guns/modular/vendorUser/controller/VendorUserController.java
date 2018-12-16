@@ -76,7 +76,7 @@ public class VendorUserController extends BaseController {
     	model.addAttribute("projects", projService.getAllProjects());
         VendorUser vendorUser = vendorUserService.selectById(vendorUserId);
         model.addAttribute("item",vendorUser);
-        model.addAttribute("leaderName",ConstantFactory.me().getUserNameById(vendorUser.getLeaderId()));
+        model.addAttribute("leaderName",ConstantFactory.me().getUserNameByAccount(vendorUser.getLeaderId()));
         LogObjectHolder.me().set(vendorUser);
         return PREFIX + "vendorUser_edit.html";
     }
@@ -94,9 +94,10 @@ public class VendorUserController extends BaseController {
     @RequestMapping(value = "/list")
 	@ResponseBody
     public Object list(String userNameCH) {
-        Integer id = AuthKit.getUser().getId();
+        //Integer id = AuthKit.getUser().getId();
+        String account = AuthKit.getUser().getAccount();
     	EntityWrapper<VendorUser> entityWrapper = new EntityWrapper<VendorUser>();
-    	Wrapper<VendorUser> result = entityWrapper.eq("leaderId", id); 
+    	Wrapper<VendorUser> result = entityWrapper.eq("leaderId", account); 
     	if(!ToolUtil.isEmpty(userNameCH)){
         	result = result.like("userNameCH", userNameCH);
         }
@@ -113,7 +114,7 @@ public class VendorUserController extends BaseController {
     public Object add(VendorUser vendorUser) {
 		vendorUser.setSalt(AuthKit.getRandomSalt(5));
 		vendorUser.setPwd(AuthKit.md5(vendorUser.getPwd(), vendorUser.getSalt()));
-		vendorUser.setLeaderId(AuthKit.getUser().getId());
+		vendorUser.setLeaderId(AuthKit.getUser().getAccount());
         vendorUserService.insert(vendorUser);
         return SUCCESS_TIP;
     }
@@ -134,6 +135,10 @@ public class VendorUserController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(VendorUser vendorUser) {
+    	if(!"******".equals(vendorUser.getPwd())){
+	    	vendorUser.setSalt(AuthKit.getRandomSalt(5));
+			vendorUser.setPwd(AuthKit.md5(vendorUser.getPwd(), vendorUser.getSalt()));
+		}
         vendorUserService.updateById(vendorUser);
         return SUCCESS_TIP;
     }

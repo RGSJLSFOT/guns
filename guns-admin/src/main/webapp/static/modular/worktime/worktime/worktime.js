@@ -16,7 +16,7 @@ Worktime.initColumn = function () {
         {field: 'selectItem', radio: true},
             {title: '工时ID', field: 'Id', visible: false, align: 'center', valign: 'middle'},
             {title: '用户ID', field: 'userId', visible: false, align: 'center', valign: 'middle'},
-            {title: '用户名称', field: 'userName', visible: true, align: 'center', valign: 'middle'},
+            {title: '用户工号', field: 'userName', visible: true, align: 'center', valign: 'middle'},
             {title: '状态', field: 'submitStatus', visible: false, align: 'center', valign: 'middle'},
             {title: '状态', field: 'submitStatusName', visible: true, align: 'center', valign: 'middle'},
             {title: '星期', field: 'week', visible: true, align: 'center', valign: 'middle'},

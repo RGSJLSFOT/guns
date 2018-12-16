@@ -22,7 +22,7 @@ public class LeaveTimeWarpper extends BaseControllerWarpper {
     public void warpTheMap(Map<String, Object> map) {
         map.put("leaveTypeName", ConstantFactory.me().getLeaveTypeName((Integer) map.get("leaveType")));
         map.put("submitStatusName", ConstantFactory.me().getSubmitStatusName((Integer) map.get("submitStatus")));
-        map.put("userName", ConstantFactory.me().getUserNameById((Integer)map.get("userId")));
+        map.put("userName",map.get("userId")); 	
     }
 
 }

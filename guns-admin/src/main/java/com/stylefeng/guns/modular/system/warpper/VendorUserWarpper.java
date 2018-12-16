@@ -21,7 +21,7 @@ public class VendorUserWarpper extends BaseControllerWarpper {
     @Override
     public void warpTheMap(Map<String, Object> map) {
     	map.put("genderName", ConstantFactory.me().getSexName((Integer) map.get("gender")));
-    	map.put("leaderName", ConstantFactory.me().getUserNameById((Integer)map.get("leaderId")));
+    	map.put("leaderName", ConstantFactory.me().getUserNameByAccount(map.get("leaderId").toString()));
     	map.put("roleName", ConstantFactory.me().getRoleName(map.get("roleId").toString()));
     	map.put("vendorName", ConstantFactory.me().getVendorNameById((Integer)map.get("vendorId")));
     	map.put("projectName", ConstantFactory.me().getProjectNameById((Integer)map.get("projectId")));

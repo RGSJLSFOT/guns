@@ -22,10 +22,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WorktimeServiceImpl extends ServiceImpl<WorktimeMapper, Worktime> implements IWorktimeService {
-	public List<Map<String, Object>> selectWorkTimesToAudit(String content,String workDate, Integer userId) {
+	public List<Map<String, Object>> selectWorkTimesToAudit(String content,String workDate, String userId) {
         return this.baseMapper.selectWorkTimesToAudit(content, workDate, userId);
     }
-	public List<Map<String, Object>> selectWorkTimesAudited(String content,String workDate,Integer userId){
+	public List<Map<String, Object>> selectWorkTimesAudited(String content,String workDate,String userId){
 		return this.baseMapper.selectWorkTimesAudited(content, workDate, userId);
 	};
 	public int updateSubmitStatusById(Integer submitStatus,Integer Id){

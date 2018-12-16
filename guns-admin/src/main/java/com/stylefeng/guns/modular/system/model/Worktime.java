@@ -23,7 +23,7 @@ public class Worktime extends Model<Worktime> {
 
     @TableId(value = "Id", type = IdType.AUTO)
     private Integer Id;
-    private Integer userId;
+    private String userId;
     private String week;
     private Date workDate;
     private Date startTime;
@@ -44,11 +44,11 @@ public class Worktime extends Model<Worktime> {
         this.Id = Id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

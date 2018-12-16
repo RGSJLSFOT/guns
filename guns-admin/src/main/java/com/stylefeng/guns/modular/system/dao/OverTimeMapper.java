@@ -18,9 +18,9 @@ import com.stylefeng.guns.modular.system.model.OverTime;
  */
 public interface OverTimeMapper extends BaseMapper<OverTime> {
 
-	public List<Map<String, Object>> selectOverTimesToAudit(@Param("startTime") String startTime, @Param("userId")Integer userId);
+	public List<Map<String, Object>> selectOverTimesToAudit(@Param("startTime") String startTime, @Param("userId")String userId);
 	
-	public List<Map<String, Object>> selectOverTimesAudited(@Param("startTime") String startTime, @Param("userId")Integer userId);
+	public List<Map<String, Object>> selectOverTimesAudited(@Param("startTime") String startTime, @Param("userId")String userId);
 	
 	public int updateSubmitStatusById(@Param("submitStatus") Integer submitStatus,@Param("Id") Integer Id);
 }

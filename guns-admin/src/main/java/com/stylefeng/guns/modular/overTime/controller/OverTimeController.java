@@ -73,7 +73,7 @@ public class OverTimeController extends BaseController {
         model.addAttribute("startTime",sdf.format(overTime.getStartTime()));
         model.addAttribute("endTime",sdf.format(overTime.getEndTime()));
         model.addAttribute("item",overTime);
-        model.addAttribute("userName", ConstantFactory.me().getUserNameById((Integer)overTime.getUserId()));
+        model.addAttribute("userName", overTime.getUserId());
         LogObjectHolder.me().set(overTime);
         if(overTime.getSubmitStatus() == 0 || overTime.getSubmitStatus() ==3){
         	return PREFIX + "overTime_edit.html";
@@ -88,7 +88,8 @@ public class OverTimeController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String startTime,Integer type) {
-        Integer userId = AuthKit.getUser().getId();
+        //Integer userId = AuthKit.getUser().getId();
+    	String userId = AuthKit.getUser().getAccount();
     	List<Map<String, Object>> overTimes;
     	
     	if(AuthKit.getUser().getRoleList().contains(9)){//角色中包含本部职员
@@ -116,7 +117,7 @@ public class OverTimeController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(OverTime overTime) {
-    	overTime.setUserId(AuthKit.getUser().getId());
+    	overTime.setUserId(AuthKit.getUser().getAccount());
         overTimeService.insert(overTime);
         return SUCCESS_TIP;
     }
@@ -160,7 +161,7 @@ public class OverTimeController extends BaseController {
 	    		submitRecordService.insert(submitRecord);
     		}else if(status == 2 || status == 3 ){
     			SubmitRecord submitRecord = submitRecordService.selectByTypeAndYwId(2, overTimeId);
-	    		submitRecord.setAuditUserId(AuthKit.getUser().getId());
+	    		submitRecord.setAuditUserId(AuthKit.getUser().getAccount());
 	    		submitRecord.setAuditTime(new Date());
 	    		submitRecord.setAuditResult(ConstantFactory.me().getSubmitStatusName(status));
 	    		submitRecordService.updateById(submitRecord);

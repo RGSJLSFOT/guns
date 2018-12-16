@@ -47,6 +47,20 @@ public class ConstantFactory {
             return "--";
         }
     }
+    /**
+     * 根据用户id获取用户名称
+     *
+     * @author stylefeng
+     * @Date 2017/5/9 23:41
+     */
+    public String getUserNameByAccount(String account) {
+    	User user = SpringContextHolder.getBean(UserMapper.class).getByAccount(account);
+    	if (user != null) {
+    		return user.getName();
+    	} else {
+    		return "--";
+    	}
+    }
     
     /**
      * 根据项目id获取项目名称

@@ -16,7 +16,7 @@ VendorUser.initColumn = function () {
         {field: 'selectItem', radio: true},
             {title: '供应商员工ID', field: 'Id', visible: false, align: 'center', valign: 'middle'},
             {title: '员工工号', field: 'userNO', visible: true, align: 'center', valign: 'middle'},
-            {title: '密码', field: 'pwd', visible: true, align: 'center', valign: 'middle'},
+            {title: '密码', field: 'pwd', visible: false, align: 'center', valign: 'middle'},
             {title: '中文名', field: 'userNameCh', visible: true, align: 'center', valign: 'middle'},
             {title: '英文名', field: 'userNameEn', visible: true, align: 'center', valign: 'middle'},
             {title: '性别代码', field: 'gender', visible: false, align: 'center', valign: 'middle'},

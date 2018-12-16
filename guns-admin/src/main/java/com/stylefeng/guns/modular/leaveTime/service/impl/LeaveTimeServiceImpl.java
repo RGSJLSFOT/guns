@@ -26,11 +26,11 @@ public class LeaveTimeServiceImpl extends ServiceImpl<LeaveTimeMapper, LeaveTime
     	return this.baseMapper.selectLeaveTimes(userId,leaveType, beginTime,endTime);
     }
 	
-	public List<Map<String, Object>> selectLeaveTimesToAudit(Integer leaveType,String leaveDate,Integer userId) {
+	public List<Map<String, Object>> selectLeaveTimesToAudit(Integer leaveType,String leaveDate,String userId) {
         return this.baseMapper.selectLeaveTimesToAudit(leaveType,leaveDate,userId);
     }
 	
-	public List<Map<String, Object>> selectLeaveTimesAudited(Integer leaveType,String leaveDate,Integer userId) {
+	public List<Map<String, Object>> selectLeaveTimesAudited(Integer leaveType,String leaveDate,String userId) {
 		return this.baseMapper.selectLeaveTimesAudited(leaveType,leaveDate,userId);
 	}
 	

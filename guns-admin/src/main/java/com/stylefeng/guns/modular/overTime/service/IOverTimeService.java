@@ -17,9 +17,9 @@ import com.stylefeng.guns.modular.system.model.OverTime;
  * @since 2018-12-06
  */
 public interface IOverTimeService extends IService<OverTime> {
-	List<Map<String, Object>> selectOverTimesToAudit(@Param("startTime") String startTime,@Param("userId") Integer userId);
+	List<Map<String, Object>> selectOverTimesToAudit(@Param("startTime") String startTime,@Param("userId") String userId);
 	
-	List<Map<String, Object>> selectOverTimesAudited(@Param("startTime") String startTime,@Param("userId") Integer userId);
+	List<Map<String, Object>> selectOverTimesAudited(@Param("startTime") String startTime,@Param("userId") String userId);
 	
 	int updateSubmitStatusById(@Param("submitStatus") Integer submitStatus,@Param("Id") Integer Id);
 }

@@ -22,7 +22,7 @@ public class LeaveTime extends Model<LeaveTime> {
 
     @TableId(value = "Id", type = IdType.AUTO)
     private Integer Id;
-    private Integer userId;
+    private String userId;
     private Integer submitStatus = 0;
     private Date startTime;
     private Date endTime;
@@ -39,11 +39,11 @@ public class LeaveTime extends Model<LeaveTime> {
         this.Id = Id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
