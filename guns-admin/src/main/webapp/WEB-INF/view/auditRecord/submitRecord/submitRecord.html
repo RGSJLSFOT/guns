@@ -7,15 +7,65 @@
             </div>
             <div class="ibox-content">
                 <div class="row row-lg">
-                    <div class="col-sm-12">
+                    <div class="col-sm-14">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                           	<div class="col-sm-2">
+							    <#SelectCon id="Type" name="单据类型" >
+		                            <option value="0">全部</option>
+			                        <option value="1">工时</option>
+			                        <option value="2">加班</option>
+			                        <option value="3">请假</option>
+	                             </#SelectCon>
+							</div>
+							<div class="col-sm-2">
+                                <#NameCon id="startDate" name="开始日期" />
                             </div>
-                            <div class="col-sm-3">
-                                <#button name="搜索" icon="fa-search" clickFun="SubmitRecord.search()"/>
+                            <div class="col-sm-2">
+                                <#NameCon id="endDate" name="结束日期" />
+                            </div>
+                            <div class="col-sm-2">
+	                            <div class="input-group">
+								    <div class="input-group-btn">
+								        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">项目
+								        </button>
+								    </div>
+								    <select class="form-control" id="proj" name="proj" onchange="VendorUser.selectProj(this.value)">
+							             <div class="list-group" id="projectList" data-bind="foreach: projects">  
+							             		<option class="list-group-item">  </option>        
+			                         			@for(proj in projects!){
+			                                        <option class="list-group-item" vendorId="${proj.Id}" value="${proj.Id}" onclick="VendorUser.selectProj('${proj.Id}')">${proj.projectKey}-${proj.projectName}</option>
+			                                    @}
+			                              </div>   
+							        </select>
+								</div>
+							</div>	
+							 
+							<div class="col-sm-2">
+							    <div class="input-group">
+								    <div class="input-group-btn">
+								        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">供应商
+								        </button>
+								    </div>
+								    <select class="form-control" id="vendor" name="vendor" onchange="VendorUser.selectVendor(this.value)">
+							             <div class="list-group" id="vendorList" data-bind="foreach: vendors">  
+							             		<option class="list-group-item">  </option>   
+			                         			@for(vendor in vendors!){
+			                                        <option class="list-group-item" vendorId="${vendor.Id}" value="${vendor.Id}" onclick="VendorUser.selectVendor('${vendor.Id}')">${vendor.vendorNameCh}</option>
+			                                    @}
+			                              </div>   
+							        </select>
+								</div>
+							</div>
+							
+							<div class="col-sm-2">
+                                <#NameCon id="account" name="工号" />
                             </div>
                         </div>
+                        <div class="row">
+                       		<div class="col-sm-12">
+                            	<#button name="搜索" icon="fa-search" clickFun="SubmitRecord.search()"/>
+                          	</div>
+                        </div>    
                         <div class="hidden-xs" id="SubmitRecordTableToolbar" role="group">
                         </div>
                         <#table id="SubmitRecordTable"/>
@@ -26,4 +76,15 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/auditRecord/submitRecord/submitRecord.js"></script>
+<script>
+	laydate.render({
+	    elem: '#startDate',
+	    type: 'date',
+	});
+	
+	laydate.render({
+	    elem: '#endDate',
+	    type: 'date',
+	});
+</script>
 @}
