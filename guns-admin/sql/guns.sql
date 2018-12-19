@@ -967,3 +967,45 @@ END
 delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+CREATE VIEW v_statistics AS SELECT
+1 type,
+( SELECT vendorNameCh FROM tbl_vendors vd WHERE vd.id = vdu.vendorId ) vendorName,
+( SELECT projectName FROM tbl_project pj WHERE pj.id = vdu.projectId ) projectName,
+userId,
+workDate date,
+workTime timelong 
+FROM
+	tbl_worktime wt,
+	tbl_vendorUser vdu 
+WHERE
+	vdu.userNO = wt.userId 
+	AND submitStatus = 2 UNION
+SELECT
+	2 type,
+	( SELECT vendorNameCh FROM tbl_vendors vd, tbl_vendorUser vdu WHERE vd.id = vdu.vendorId AND vdu.userNO = userId ) vendorName,
+	( SELECT projectName FROM tbl_project pj WHERE pj.id = vdu.projectId ) projectName,
+	userId,
+	overDate date,
+	overTimeHour timelong 
+FROM
+	tbl_overTime ot,
+	tbl_vendorUser vdu 
+WHERE
+	vdu.userNO = ot.userId 
+	AND submitStatus = 2 UNION
+SELECT
+	3 type,
+	( SELECT vendorNameCh FROM tbl_vendors vd, tbl_vendorUser vdu WHERE vd.id = vdu.vendorId AND vdu.userNO = userId ) vendorName,
+	( SELECT projectName FROM tbl_project pj WHERE pj.id = vdu.projectId ) projectName,
+	userId,
+	leaveDate date,
+	leaveTime timelong 
+FROM
+	tbl_leaveTime lt,
+	tbl_vendorUser vdu 
+WHERE
+	vdu.userNO = lt.userId 
+	AND submitStatus = 2
