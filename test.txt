@@ -1,0 +1,29 @@
+public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+    private static boolean isOverlap(String startdate1, String enddate1,String startdate2, String enddate2) {  
+        Date leftStartDate = null;  
+        Date leftEndDate = null;  
+        Date rightStartDate = null;  
+        Date rightEndDate = null;  
+        try {  
+            leftStartDate = format.parse(startdate1);  
+            leftEndDate = format.parse(enddate1);  
+            rightStartDate = format.parse(startdate2);  
+            rightEndDate = format.parse(enddate2);  
+        } catch (ParseException e) {  
+            return false;  
+        }  
+          
+        return   
+            ((leftStartDate.getTime() >= rightStartDate.getTime())   
+                    && leftStartDate.getTime() < rightEndDate.getTime())  
+            ||  
+            ((leftStartDate.getTime() > rightStartDate.getTime())   
+                    && leftStartDate.getTime() <= rightEndDate.getTime())  
+            ||  
+            ((rightStartDate.getTime() >= leftStartDate.getTime())   
+                    && rightStartDate.getTime() < leftEndDate.getTime())  
+            ||  
+            ((rightStartDate.getTime() > leftStartDate.getTime())   
+                    && rightStartDate.getTime() <= leftEndDate.getTime());  
+              
+    }  
