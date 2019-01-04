@@ -27,3 +27,19 @@ public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:s
                     && rightStartDate.getTime() <= leftEndDate.getTime());  
               
     }  
+
+
+private static List<String> dateUtil(Date start, Date end) {
+        List<String> list = new ArrayList<String>();
+        long s = start.getTime();
+        long e = end.getTime();
+
+        Long oneDay = 1000 * 60 * 60 * 24l;
+
+        while (s <= e) {
+            start = new Date(s);
+            list.add(new SimpleDateFormat("yyyy-MM-dd").format(start));
+            s += oneDay;
+        }
+        return list;
+    }
