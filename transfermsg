@@ -1,1 +1,35 @@
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCurBs/9ptu6RbKRl/y8QhwecepdWAle4jMqq0CYSpT8x9X0SeuO0Wa+oJVAUiIYl4K4DKWAXvlmtuZoEue6m+1kCpeSM4nH+04MbGuclhI2vPf4JyZD4/tul1tHdYg4We31uW3XoeFTsV6xeAsix0owZ+QFdu0f97ooE4dBOVDyQlwIVMqLKrro9pQfKX5dgY2re4/C3bJ9MLenfgkvDMGn9WhY6cUtICXcgHGZtjn6Gdf6bn2Jjag5NgxbuWHojasf9jUW4T/+8XVIc9etHuoAZpy7NbYW4kSYQLidSa07jSnKHxWn2B3GU8keedJ0DHDjpF79i8utzRP12ZG4PrD vn0wqao@WDWSPC145
+动态创建数据源,不需要事务
+ 入参:数据源信息,表名,备份天数
+ 如果表名为空,则遍历所有的表进行备份
+ 如果表名不为空,则备份该表
+ 
+ 备份过程:如果备份表已经存在,查出字段,使用占位符写动态sql,使用insert info select
+   如果备份表不存在,则根据原表进行动态创建备份表,然后使用占位符,insert into select 进行备份
+ 如果备份过程中,出现异常则删除备份的数据. 
+ 
+ 
+ 
+ 步骤:
+ 1.配置动态数据源
+  入参:数据源信息(url,username,password,driver-class-name),表名(tableName),备份天数(backupDay)
+ 
+  连接数据库
+  
+ 2.动态读取表和字段
+  表名不为空:通过表名读取数据库表中的字段和类型
+  
+  表名为空:遍历数据库中所有的表和字段和字段类型
+  https://www.cnblogs.com/zuidongfeng/p/7895090.html
+ 
+ 3.通过读取的表名和字段,动态创建备份表(xx_backup): 
+  https://blog.csdn.net/qq_36688928/article/details/90442985  
+  https://www.iteye.com/blog/cuisuqiang-1893513
+ 
+ 4.使用占位符动态创建sql.进行数据插入和删除
+ 
+ 问题:1.如果insert into select 中间出错,catch里面delete备份表信息,给个boolean标识,就不进行delete原表数据.
+  2.如果delete原表中间出错,catch里面继续删除,可能进入死循环,
+   因为删除不干净,可能重新执行insert into select时有重复数据到备份表
+  3.项目里面现在有一个数据源,不做改变
+  
+ 关闭数据连接
