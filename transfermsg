@@ -1,1 +1,1 @@
-db.monitorDeviceStatusUse.find({updateTime:{$gt:ISODate('2019-10-20T00:00:00.000+00:00'),$gt:ISODate('2019-10-21T00:00:00.000+00:00')}})
+https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=ww2736b20d7a3be388&corpsecret=LEB2MapYREs6fMMGvhpkzeAEV2oUKqITI8HIbg76hMc
